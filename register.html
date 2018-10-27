@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	background-color: gray;
+	font: 90% Arial. Helvetica, sans-serif;
+	margin: 20px;
+}
+
+label {
+	color: navy;
+	float: left;
+	width: 8em;
+	font-weight: bold;
+	text-align: right;
+}
+
+input {
+	width: 15em;
+	margin-left: 1em;
+	margin-bottom: .5em;
+}
+
+input:focus {
+	border: 2px solid navy;
+}
+
+#button, #reset{
+	width: 7em;
+	box-shadow; 2px 2px 0 navy;
+	background-color: silver;
+}
+
+#button {
+	margin-left: 7em;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+	text-decoration: underline;
+
+}
+
+div {
+	background-color: white;
+	width: 80%;
+	border: 25px solid black;
+	padding 25px;
+	margin: 25px;
+	align: center;
+	
+}
+
+</style>
+<title>Rendezvous Account Registration</title>
+</head>
+<body>
+
+<form action = "register.php"> 
+
+<h1>Signing up is fast and easy!</h1>
+<div>
+	<label for="user">Username:</label>
+	<input type="text" name="user" id="user" autofocus><br>
+	<label for="email">Email:</label>
+	<input type="text" name="email" id="email"><br>
+	<label for="password">Password:</label>
+	<input type="text" name="password" id="password"><br>
+	<input type="submit" value = "Register Account">
+	<input type="reset">
+</div>
+<br>
+<br>
+<a href="index.html">Proceed to Login</a>
+
+</body>
+
+</html>
+

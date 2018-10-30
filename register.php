@@ -17,9 +17,15 @@ $password = $_GET[ "password" ];
 
 
 
+$servername = "localhost";
+$username = "490admin";
+$password = "admin";
+$db = "IT490";
 
-reg_chk ($user, $email, $password);
-register ($user, $email, $password);
+
+$conn = new mysqli($servername, $username, $password, $db);
+$result  = $conn -> query("INSERT INTO accounts (user, email,password) VALUES ('$user', '$email', '$password')");
+redirect("Registration successful", "index.html");
 
 
 

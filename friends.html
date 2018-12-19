@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+	background-color: gray;
+	font: 90% Arial. Helvetica, sans-serif;
+	margin: 20px;
+}
+label {
+	color: navy;
+	float: left;
+	width: 8em;
+	font-weight: bold;
+	text-align: right;
+}
+input {
+	width: 15em;
+	margin-left: 1em;
+	margin-bottom: .5em;
+}
+input:focus {
+	border: 2px solid navy;
+}
+#button, #reset{
+	width: 7em;
+	box-shadow; 2px 2px 0 navy;
+	background-color: silver;
+}
+#button {
+	margin-left: 7em;
+}
+h1 {
+	color: white;
+	text-align: center;
+	text-decoration: underline;
+}
+div {
+	background-color: white;
+	width: 80%;
+	border: 25px solid black;
+	padding 25px;
+	margin: 25px;
+	align: center;
+}
+</style>
+    <title>Rendezvous! The Event Planning App!</title>
+</head>
+
+<body>
+
+
+    <h1>Welcome to Rendezvous! Make your day!</h1>
+    <div>
+
+        <br>
+        Users: <br>
+
+        <ul id="users">
+        </ul>
+        Friends: <br>
+
+        <ul id="friends">
+
+        </ul>
+    </div>
+    <br>
+    <br>
+
+    <a href="index.html">Logout</a>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function addFriend(name) {
+            $("#friends").append("<li>" + decodeURI(name) + "</li>");
+						const urlParams = new URLSearchParams(window.location.search);
+						const user = urlParams.get('user');
+						var urls = "api.php/friendslist";
+						$.ajax({
+								type: "POST",
+								url: urls,
+    						contentType: 'application/json',
+								dataType: 'json',
+								data: JSON.stringify({
+									"name": name,
+									"user": user
+								}),
+								success: function(response) {
+									alert(decodeURI(place) +" restaurants were saved!");
+								}
+						});
+        }
+        $(document).ready(function() {
+					const urlParams = new URLSearchParams(window.location.search);
+					const user = urlParams.get('user');
+          $.ajax({
+							type: "GET",
+							url: "api.php/accounts",
+							success: function(response) {
+									var json = JSON.parse(response);
+									$.each(json, function(key, value) {
+                      $("#users").append("<li>" + value.user +
+                          ' <button onclick=addFriend("' + encodeURI(value.user) + '")>Add</button></li>');
+									});
+							}
+					});
+					$.ajax({
+							type: "GET",
+							url: "api.php/friendslist",
+							success: function(response) {
+									var json = JSON.parse(response);
+									$.each(json, function(key, value) {
+                    if(value.user === user){
+											$("#friends").append("<li>" + value.name +'</li>');
+                    }
+									});
+							}
+					});
+        });
+    </script>
+
+</body>
+
+
+</html>
